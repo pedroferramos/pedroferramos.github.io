@@ -3,339 +3,684 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STEK — Propagated Houseplants</title>
+<title>Pedro Ramos — Mechatronics &amp; Robotics Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #EDE7DA;
-    --ink: #1F2B1A;
-    --green: #52734D;
-    --green-deep: #33481F;
-    --terracotta: #C1673C;
-    --cream: #F3ECDD;
-    --line: #C9BFA9;
+    --paper:#EDEFEA;
+    --paper-line:#C9CDC2;
+    --ink:#1E2320;
+    --ink-soft:#4A524B;
+    --signal:#D9480F;
+    --signal-dark:#B23A0A;
+    --signal-tint:#F2C9B0;
+    --card-bg:#F5F6F1;
+    --max:1120px;
   }
-  *{ box-sizing: border-box; margin:0; padding:0; }
-  html{ scroll-behavior: smooth; }
-  body{
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 32px; }
-  a{ color: inherit; }
-  .mono{ font-family: 'JetBrains Mono', monospace; }
 
-  /* ---- Nav ---- */
-  header{
-    position: sticky; top:0; z-index: 50;
-    background: rgba(237,231,218,0.9);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line);
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
   }
-  nav.wrap{
+
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0 / 100% 32px,
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px) 0 0 / 32px 100%,
+      var(--paper);
+    background-blend-mode:normal;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Faint grid — reduce opacity by layering a translucent paper wash */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:var(--paper);
+    opacity:0.86;
+    pointer-events:none;
+    z-index:-1;
+  }
+
+  a{color:var(--ink); text-decoration:none;}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--signal);
+    outline-offset:3px;
+  }
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--signal-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px; height:1px;
+    background:var(--signal);
+    display:inline-block;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(237,239,234,0.92);
+    backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  nav{
+    max-width:var(--max); margin:0 auto; padding:16px 28px;
     display:flex; align-items:center; justify-content:space-between;
-    height: 76px;
   }
   .brand{
-    font-family:'Fraunces', serif; font-weight:700; font-size: 22px;
-    letter-spacing: 0.02em;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.02em;
   }
-  .brand span{ color: var(--terracotta); }
-  .navlinks{ display:flex; gap: 32px; list-style:none; }
+  .brand span{color:var(--signal);}
+  .navlinks{
+    display:flex; gap:28px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
   .navlinks a{
-    text-decoration:none; font-size: 14px; font-weight:500;
-    color: var(--green-deep);
-    position:relative;
+    color:var(--ink-soft);
+    padding-bottom:2px;
+    border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
   }
-  .navlinks a::after{
-    content:''; position:absolute; left:0; bottom:-4px; height:1px; width:0;
-    background: var(--terracotta); transition: width .25s ease;
-  }
-  .navlinks a:hover::after{ width:100%; }
+  .navlinks a:hover{color:var(--ink); border-color:var(--signal);}
 
-  /* ---- Hero ---- */
-  .hero{
-    padding: 88px 0 72px;
-    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items:center;
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 0;}
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
   }
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace; font-size: 12px;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--terracotta); margin-bottom: 18px; display:block;
-  }
-  h1{
-    font-family:'Fraunces', serif; font-weight: 600; font-size: clamp(38px, 5vw, 60px);
-    line-height: 1.04; color: var(--green-deep); letter-spacing: -0.01em;
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 56px);
+    line-height:1.06;
+    margin-top:14px;
   }
   .hero p.lede{
-    margin-top: 22px; font-size: 17px; max-width: 46ch; color: #3B4A34;
+    font-size:17px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin-top:20px;
   }
-  .cta-row{ display:flex; gap:16px; margin-top: 34px; align-items:center; flex-wrap: wrap; }
+  .hero-cta{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
   .btn{
-    display:inline-block; padding: 13px 24px; border-radius: 3px;
-    font-size: 14px; font-weight:600; text-decoration:none;
-    border: 1px solid var(--green-deep);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:12px 20px;
+    border:1px solid var(--ink);
+    display:inline-block;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
   }
-  .btn-solid{ background: var(--green-deep); color: var(--cream); }
-  .btn-solid:hover{ background: var(--green); border-color: var(--green); }
-  .btn-ghost{ color: var(--green-deep); }
-  .btn-ghost:hover{ background: rgba(51,72,31,0.06); }
-  .stat-line{
-    margin-top: 30px; font-family:'JetBrains Mono', monospace; font-size: 12.5px;
-    color: #5C6B54;
+  .btn.primary{background:var(--ink); color:var(--paper);}
+  .btn.primary:hover{background:var(--signal); border-color:var(--signal);}
+  .btn.ghost:hover{border-color:var(--signal); color:var(--signal-dark);}
+
+  .arm-figure{
+    border:1px solid var(--paper-line);
+    background:var(--card-bg);
+    padding:10px;
+  }
+  .arm-figure svg{width:100%; height:auto; display:block;}
+  .arm-figure figcaption{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    padding:10px 6px 2px;
+    letter-spacing:0.04em;
   }
 
-  .jar-wrap{ display:flex; justify-content:center; }
-  .jar-wrap svg{ width: 100%; max-width: 340px; height:auto; }
-
-  /* ---- Section shell ---- */
-  section{ padding: 64px 0; border-top: 1px solid var(--line); }
-  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 40px; gap: 24px; flex-wrap: wrap; }
-  h2{
-    font-family:'Fraunces', serif; font-weight:600; font-size: 32px; color: var(--green-deep);
+  .joint-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    fill:var(--ink-soft);
+    opacity:0;
+    transition:opacity .2s ease;
   }
-  .section-note{ font-size: 14px; color:#5C6B54; max-width: 34ch; }
+  .joint-group:hover .joint-label,
+  .joint-group:focus .joint-label{opacity:1;}
+  .joint-dot{fill:var(--signal); transition:r .15s ease;}
+  .joint-group:hover .joint-dot{r:6;}
+  .arm-link{stroke:var(--ink); stroke-width:3; fill:none; stroke-linecap:round;}
+  .arm-dim{stroke:var(--ink-soft); stroke-width:1; stroke-dasharray:3 3;}
 
-  /* ---- Plant grid ---- */
-  .grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  /* ---------- TITLE BLOCK ---------- */
+  .title-block{
+    margin-top:56px;
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--paper-line);
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+  }
+  .tb-cell{
+    padding:14px 18px;
+    border-right:1px solid var(--paper-line);
+  }
+  .tb-cell:last-child{border-right:none;}
+  .tb-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .tb-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    margin-top:4px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:96px 0;}
+  section.tight{padding:80px 0;}
+  .sec-head{margin-bottom:36px;}
+  .sec-head h2{font-size:clamp(24px,3vw,32px); margin-top:10px;}
+
+  .about-text{
+    font-size:16.5px;
+    line-height:1.75;
+    color:var(--ink-soft);
+    max-width:68ch;
+  }
+  .about-text strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- WORK CARDS ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--paper-line);
+    border:1px solid var(--paper-line);
+  }
   .card{
-    background: var(--cream); border: 1px solid var(--line); border-radius: 4px;
-    padding: 22px; display:flex; flex-direction:column; gap: 14px;
-    transition: transform .2s ease, box-shadow .2s ease;
+    background:var(--card-bg);
+    padding:28px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
   }
-  .card:hover{ transform: translateY(-4px); box-shadow: 0 14px 26px rgba(31,43,26,0.09); }
-  .card svg{ width: 56px; height: 56px; }
-  .tag-row{
-    display:flex; justify-content:space-between; align-items:center;
-    font-family:'JetBrains Mono', monospace; font-size: 11px; color: var(--terracotta);
-    letter-spacing: 0.04em; text-transform: uppercase;
+  .card h3{font-size:19px;}
+  .card p{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    margin:0;
+    flex-grow:1;
   }
-  .card h3{
-    font-family:'Fraunces', serif; font-weight:600; font-size: 19px; color: var(--green-deep);
-  }
-  .card .latin{ font-style: italic; font-size: 13px; color:#6B7A63; margin-top: -8px; }
-  .card .desc{ font-size: 13.5px; color:#4A5843; flex-grow:1; }
-  .card-foot{
-    display:flex; justify-content:space-between; align-items:center;
-    border-top: 1px dashed var(--line); padding-top: 12px;
-  }
-  .price{ font-family:'JetBrains Mono', monospace; font-weight:500; font-size: 15px; color: var(--green-deep); }
-  .stock{ font-size: 11px; font-family:'JetBrains Mono', monospace; color: var(--green); }
-  .stock.low{ color: var(--terracotta); }
-
-  /* ---- Care ---- */
-  .care-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .care-card{
-    padding: 22px; border: 1px solid var(--line); border-radius: 4px; background: transparent;
-  }
-  .care-card .k{
-    font-family:'JetBrains Mono', monospace; font-size: 11px; color: var(--terracotta);
-    text-transform: uppercase; letter-spacing: 0.08em; display:block; margin-bottom: 10px;
-  }
-  .care-card p{ font-size: 14px; color:#3B4A34; }
-
-  /* ---- Order ---- */
-  .order-panel{
-    background: var(--green-deep); color: var(--cream); border-radius: 6px;
-    padding: 48px; display:grid; grid-template-columns: 1fr 1fr; gap: 40px;
-  }
-  .order-panel h2{ color: var(--cream); }
-  .order-panel .section-note{ color: #C9D6C2; }
-  .contact-list{ list-style:none; display:flex; flex-direction:column; gap: 16px; margin-top: 8px; }
-  .contact-list a{
-    text-decoration:none; font-family:'JetBrains Mono', monospace; font-size: 14px;
-    color: var(--cream); border-bottom: 1px solid rgba(243,236,221,0.3); padding-bottom: 10px;
-    display:flex; justify-content:space-between;
-  }
-  .contact-list a:hover{ border-color: var(--terracotta); color: #F0C7A8; }
-  .order-steps{ list-style:none; counter-reset: step; display:flex; flex-direction:column; gap: 18px; }
-  .order-steps li{
-    counter-increment: step; padding-left: 34px; position:relative; font-size: 14px; color:#D8E0D0;
-  }
-  .order-steps li::before{
-    content: counter(step); position:absolute; left:0; top:-2px;
-    font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--terracotta);
-    border: 1px solid rgba(193,103,60,0.6); width: 22px; height:22px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    padding:4px 8px;
+    border:1px solid var(--paper-line);
+    color:var(--ink-soft);
   }
 
-  footer{ padding: 28px 0 40px; text-align:center; font-size: 12px; color:#6B7A63; font-family:'JetBrains Mono', monospace; }
+  /* ---------- REVISION HISTORY TABLE ---------- */
+  table.revhist{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14.5px;
+  }
+  table.revhist th{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    text-align:left;
+    padding:10px 12px;
+    border-bottom:1px solid var(--ink);
+  }
+  table.revhist td{
+    padding:16px 12px;
+    border-bottom:1px solid var(--paper-line);
+    vertical-align:top;
+    line-height:1.5;
+  }
+  table.revhist td.date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    white-space:nowrap;
+    color:var(--ink-soft);
+  }
+  table.revhist td.role{font-weight:500;}
+  table.revhist td.notes{color:var(--ink-soft);}
 
-  .fade-in{ opacity:0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-  .fade-in.visible{ opacity:1; transform: translateY(0); }
+  /* ---------- BOM / SKILLS ---------- */
+  .bom{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--paper-line);
+    border:1px solid var(--paper-line);
+  }
+  .bom-group{background:var(--card-bg); padding:24px;}
+  .bom-group h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--signal-dark);
+    margin-bottom:14px;
+  }
+  .bom-list{list-style:none; margin:0; padding:0;}
+  .bom-list li{
+    display:flex; justify-content:space-between; gap:12px;
+    padding:8px 0;
+    border-bottom:1px solid var(--paper-line);
+    font-size:14px;
+  }
+  .bom-list li:last-child{border-bottom:none;}
+  .bom-idx{font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); font-size:12px;}
 
+  /* ---------- CONTACT ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  .contact-fields{
+    border:1px solid var(--paper-line);
+    background:var(--card-bg);
+  }
+  .cf-row{
+    display:grid; grid-template-columns:110px 1fr;
+    padding:14px 18px;
+    border-bottom:1px solid var(--paper-line);
+    align-items:baseline;
+  }
+  .cf-row:last-child{border-bottom:none;}
+  .cf-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .cf-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+  }
+  .cf-value a{border-bottom:1px solid var(--paper-line); transition:border-color .15s ease, color .15s ease;}
+  .cf-value a:hover{border-color:var(--signal); color:var(--signal-dark);}
+  .placeholder{color:var(--signal-dark);}
+
+  footer{
+    border-top:1px solid var(--ink);
+    padding:22px 0;
+  }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  footer p{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- responsive ---------- */
   @media (max-width: 860px){
-    .hero{ grid-template-columns: 1fr; }
-    .jar-wrap{ order:-1; }
-    .grid{ grid-template-columns: repeat(2, 1fr); }
-    .care-grid{ grid-template-columns: 1fr; }
-    .order-panel{ grid-template-columns: 1fr; padding: 32px; }
-    .navlinks{ display:none; }
+    .hero-grid{grid-template-columns:1fr;}
+    .arm-figure{order:-1;}
+    .title-block{grid-template-columns:repeat(2,1fr);}
+    .cards{grid-template-columns:1fr;}
+    .bom{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .navlinks{gap:16px;}
   }
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    .fade-in{ opacity:1; transform:none; transition:none; }
-    .card{ transition:none; }
+  @media (max-width: 520px){
+    .navlinks{display:none;}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <nav class="wrap">
-    <div class="brand">STEK<span>.</span></div>
-    <ul class="navlinks">
-      <li><a href="#plants">Plants</a></li>
-      <li><a href="#care">Care</a></li>
-      <li><a href="#order">Order</a></li>
-    </ul>
-    <a href="#order" class="btn btn-solid" style="padding:10px 18px; font-size:13px;">Get in touch</a>
+<header class="site">
+  <nav>
+    <div class="brand">P<span>·</span>RAMOS</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
   </nav>
 </header>
 
-<section class="hero wrap" style="border-top:none;">
-  <div>
-    <span class="eyebrow">Leuven · Cuttings &amp; rooted plants</span>
-    <h1>Every leaf here started as a cutting.</h1>
-    <p class="lede">Small-batch houseplants propagated at home — pothos, monstera, spider plants and calathea, grown under light until they're ready to root at yours.</p>
-    <div class="cta-row">
-      <a href="#plants" class="btn btn-solid">See what's rooted</a>
-      <a href="#order" class="btn btn-ghost">How to order</a>
-    </div>
-    <div class="stat-line">rooted_this_season: 42 &nbsp;·&nbsp; pickup: Leuven &nbsp;·&nbsp; restock: weekly</div>
-  </div>
-  <div class="jar-wrap">
-    <svg viewBox="0 0 280 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- jar -->
-      <path d="M90 150 L86 300 Q86 312 98 312 L182 312 Q194 312 194 300 L190 150 Z" fill="#F3ECDD" stroke="#33481F" stroke-width="2"/>
-      <ellipse cx="140" cy="150" rx="50" ry="10" fill="#EDE7DA" stroke="#33481F" stroke-width="2"/>
-      <path d="M96 160 L92 295 Q92 302 100 302 L180 302 Q188 302 188 295 L184 160" fill="#DCE8DA" opacity="0.6"/>
-      <!-- cutting stem -->
-      <path d="M140 150 C136 210 150 250 140 300" stroke="#33481F" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- roots in water -->
-      <path d="M140 250 C120 260 118 275 112 290" stroke="#52734D" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M140 255 C160 265 164 278 170 292" stroke="#52734D" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M140 265 C130 280 132 290 128 300" stroke="#52734D" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M140 268 C150 282 148 292 152 300" stroke="#52734D" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <!-- leaves -->
-      <path d="M140 150 C110 140 95 110 100 80 C130 90 148 115 140 150Z" fill="#52734D" stroke="#33481F" stroke-width="2"/>
-      <path d="M140 150 C170 140 185 108 178 78 C150 88 132 114 140 150Z" fill="#6C8A62" stroke="#33481F" stroke-width="2"/>
-      <path d="M140 150 C136 120 145 95 140 65 C130 92 128 122 140 150Z" fill="#3D5735" stroke="#33481F" stroke-width="2"/>
-      <line x1="118" y1="100" x2="130" y2="130" stroke="#33481F" stroke-width="1"/>
-      <line x1="160" y1="98" x2="150" y2="128" stroke="#33481F" stroke-width="1"/>
-      <!-- tag -->
-      <rect x="176" y="185" width="60" height="30" rx="2" fill="#F3ECDD" stroke="#C1673C" stroke-width="1.5" transform="rotate(8 176 185)"/>
-      <text x="182" y="205" font-family="JetBrains Mono, monospace" font-size="9" fill="#C1673C" transform="rotate(8 176 185)">stek #24</text>
-    </svg>
-  </div>
-</section>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Mechatronics &amp; Robotics Engineer</div>
+          <h1>Precision robotics,<br>from CAD to control loop.</h1>
+          <p class="lede">I'm a mechatronics engineer finishing my Master's at KU Leuven Group T — currently leading the robotic arm subsystem for a Mars rover, and building an ML pipeline to catch anomalies in robotic unscrewing.</p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#work">See the work</a>
+            <a class="btn ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
 
-<section id="plants">
-  <div class="wrap">
-    <div class="section-head fade-in">
-      <h2>Available now</h2>
-      <p class="section-note">Everything below is a real cutting or rooted division — quantities are limited and update weekly.</p>
-    </div>
-    <div class="grid">
+        <figure class="arm-figure">
+          <svg viewBox="0 0 560 420" role="img" aria-labelledby="armTitle armDesc">
+            <title id="armTitle">Line diagram of a 3-joint robotic arm</title>
+            <desc id="armDesc">Base, T2 joint, T3 joint and end effector, annotated as on a technical drawing.</desc>
 
-      <div class="card fade-in">
-        <svg viewBox="0 0 60 60" fill="none"><path d="M30 55 C30 40 15 35 12 20 C25 22 32 32 30 55Z" fill="#52734D" stroke="#33481F" stroke-width="2"/><path d="M30 55 C30 38 45 34 48 18 C34 21 27 32 30 55Z" fill="#8FA87F" stroke="#33481F" stroke-width="2"/></svg>
-        <div class="tag-row"><span>Pothos</span><span>Cutting</span></div>
-        <h3>Marble Queen</h3>
-        <p class="latin">Epipremnum aureum</p>
-        <p class="desc">2–3 leaves, well-rooted in water. Trailing variegated foliage, easy care.</p>
-        <div class="card-foot"><span class="price">€6</span><span class="stock">in stock: 5</span></div>
+            <!-- baseplate -->
+            <rect x="60" y="330" width="90" height="18" fill="none" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="60" y1="348" x2="150" y2="348" stroke="var(--ink)" stroke-width="2"/>
+            <line x1="55" y1="352" x2="65" y2="362" stroke="var(--ink-soft)" stroke-width="1.5"/>
+            <line x1="75" y1="352" x2="85" y2="362" stroke="var(--ink-soft)" stroke-width="1.5"/>
+            <line x1="95" y1="352" x2="105" y2="362" stroke="var(--ink-soft)" stroke-width="1.5"/>
+            <line x1="115" y1="352" x2="125" y2="362" stroke="var(--ink-soft)" stroke-width="1.5"/>
+            <line x1="135" y1="352" x2="145" y2="362" stroke="var(--ink-soft)" stroke-width="1.5"/>
+
+            <!-- links -->
+            <path class="arm-link" d="M105,330 L230,190"/>
+            <path class="arm-link" d="M230,190 L370,120"/>
+            <path class="arm-link" d="M370,120 L470,95"/>
+
+            <!-- base joint -->
+            <g class="joint-group" tabindex="0">
+              <circle class="joint-dot" cx="105" cy="330" r="5"/>
+              <text class="joint-label" x="115" y="335">BASE — YAW AXIS</text>
+            </g>
+
+            <!-- T2 joint -->
+            <g class="joint-group" tabindex="0">
+              <circle class="joint-dot" cx="230" cy="190" r="5"/>
+              <text class="joint-label" x="240" y="185">T2 — TORQUE SENSOR</text>
+              <path class="arm-dim" d="M230,190 A30,30 0 0,1 255,165"/>
+            </g>
+
+            <!-- T3 joint -->
+            <g class="joint-group" tabindex="0">
+              <circle class="joint-dot" cx="370" cy="120" r="5"/>
+              <text class="joint-label" x="330" y="105">T3 — TORQUE SENSOR</text>
+            </g>
+
+            <!-- end effector -->
+            <g class="joint-group" tabindex="0">
+              <circle class="joint-dot" cx="470" cy="95" r="5"/>
+              <path d="M470,95 L495,80 M470,95 L495,110" class="arm-link" stroke-width="2"/>
+              <text class="joint-label" x="420" y="65">END EFFECTOR — UNSCREW TOOL</text>
+            </g>
+
+            <!-- dimension line under link 1 -->
+            <line class="arm-dim" x1="105" y1="360" x2="230" y2="360"/>
+            <line class="arm-dim" x1="105" y1="330" x2="105" y2="360"/>
+            <line class="arm-dim" x1="230" y1="190" x2="230" y2="360"/>
+            <text x="150" y="376" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--ink-soft)">LINK 1</text>
+          </svg>
+          <figcaption>FIG. 1 — ARM SCHEMATIC · HOVER JOINTS FOR CALLOUTS</figcaption>
+        </figure>
       </div>
 
-      <div class="card fade-in">
-        <svg viewBox="0 0 60 60" fill="none"><path d="M30 56 C22 40 8 38 6 24 C20 22 30 34 30 56Z" fill="#3D5735" stroke="#33481F" stroke-width="2"/><circle cx="16" cy="30" r="3" fill="#EDE7DA"/><circle cx="20" cy="38" r="2.5" fill="#EDE7DA"/><path d="M30 56 C38 40 52 38 54 24 C40 22 30 34 30 56Z" fill="#52734D" stroke="#33481F" stroke-width="2"/></svg>
-        <div class="tag-row"><span>Monstera</span><span>Rooted</span></div>
-        <h3>Deliciosa</h3>
-        <p class="latin">Monstera deliciosa</p>
-        <p class="desc">Single node cutting with one fenestrated leaf, roots established ~4 weeks.</p>
-        <div class="card-foot"><span class="price">€15</span><span class="stock low">in stock: 2</span></div>
-      </div>
-
-      <div class="card fade-in">
-        <svg viewBox="0 0 60 60" fill="none"><path d="M30 56 L30 30" stroke="#33481F" stroke-width="2"/><path d="M30 30 C20 20 16 10 18 4 C26 10 30 20 30 30Z" fill="#6C8A62" stroke="#33481F" stroke-width="2"/><path d="M30 30 C40 20 44 10 42 4 C34 10 30 20 30 30Z" fill="#52734D" stroke="#33481F" stroke-width="2"/><path d="M30 32 C24 26 22 18 24 12 C29 18 30 26 30 32Z" fill="#8FA87F"/></svg>
-        <div class="tag-row"><span>Spider Plant</span><span>Pup</span></div>
-        <h3>Bonnie</h3>
-        <p class="latin">Chlorophytum comosum</p>
-        <p class="desc">Curly-leaf pup, fully rooted and potted in a 9cm nursery pot.</p>
-        <div class="card-foot"><span class="price">€5</span><span class="stock">in stock: 7</span></div>
-      </div>
-
-      <div class="card fade-in">
-        <svg viewBox="0 0 60 60" fill="none"><path d="M30 56 C18 50 14 34 20 18 C34 22 40 40 30 56Z" fill="#52734D" stroke="#33481F" stroke-width="2"/><path d="M22 24 C26 32 26 40 24 48" stroke="#F3ECDD" stroke-width="2" fill="none"/><path d="M30 20 C33 30 33 42 30 52" stroke="#F3ECDD" stroke-width="2" fill="none"/></svg>
-        <div class="tag-row"><span>Calathea</span><span>Division</span></div>
-        <h3>Orbifolia</h3>
-        <p class="latin">Goeppertia orbifolia</p>
-        <p class="desc">Divided offset with 2 mature leaves, striped silver-green pattern.</p>
-        <div class="card-foot"><span class="price">€12</span><span class="stock low">in stock: 1</span></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="care">
-  <div class="wrap">
-    <div class="section-head fade-in">
-      <h2>Basic care</h2>
-      <p class="section-note">What each plant needs to keep rooting well after it leaves here.</p>
-    </div>
-    <div class="care-grid">
-      <div class="care-card fade-in">
-        <span class="k">Light</span>
-        <p>Bright, indirect light for all four — a spot near a window but out of direct midday sun. Calathea tolerates lower light best.</p>
-      </div>
-      <div class="care-card fade-in">
-        <span class="k">Water</span>
-        <p>Let the top few cm of soil dry between waterings. Cuttings still in water: refresh weekly until roots reach 3–4cm, then pot up.</p>
-      </div>
-      <div class="care-card fade-in">
-        <span class="k">First weeks</span>
-        <p>Keep newly potted cuttings out of direct sun and drafts for the first two weeks while roots settle in.</p>
+      <div class="title-block">
+        <div class="tb-cell">
+          <div class="tb-label">Name</div>
+          <div class="tb-value">Pedro Ramos</div>
+        </div>
+        <div class="tb-cell">
+          <div class="tb-label">Discipline</div>
+          <div class="tb-value">Mechatronics / Robotics</div>
+        </div>
+        <div class="tb-cell">
+          <div class="tb-label">Based in</div>
+          <div class="tb-value">Leuven, BE</div>
+        </div>
+        <div class="tb-cell">
+          <div class="tb-label">Status</div>
+          <div class="tb-value">MSc Candidate — KU Leuven Group T</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="order">
-  <div class="wrap fade-in">
-    <div class="order-panel">
-      <div>
-        <h2>Order a plant</h2>
-        <p class="section-note">Message with the plant name — I'll confirm what's in stock and arrange pickup in Leuven.</p>
-        <ul class="contact-list">
-          <li><a href="mailto:hello@stek.plants">Email <span>hello@stek.plants</span></a></li>
-          <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram <span>@stek.plants</span></a></li>
-          <li><a href="https://wa.me/32000000000" target="_blank" rel="noopener">WhatsApp <span>+32 000 00 00</span></a></li>
-        </ul>
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">About</div>
+        <h2>Portuguese-Luxembourgish, engineering things that grip, turn, and hold.</h2>
       </div>
-      <ol class="order-steps">
-        <li>Pick a plant from the list above and check it's still in stock.</li>
-        <li>Send a message with the plant name and your preferred pickup day.</li>
-        <li>Pick up in Leuven — cash or payconiq on collection.</li>
-      </ol>
+      <p class="about-text reveal">
+        I grew up between Penafiel, Portugal and the Luxembourg countryside, which is probably why I gravitate
+        toward systems with a lot of moving parts. I'm finishing my <strong>Bachelor's at KU Leuven Group T
+        in September 2026</strong> and continuing straight into the <strong>Master's in Electromechanical
+        Engineering Technology</strong>, specializing in mechatronics with a focus on advanced robotics — my
+        last year at Group T. Day to day that means CAD in Siemens NX, PLC logic in TIA Portal, and a lot of
+        Python holding it all together. I speak Portuguese natively, English, French and Luxembourgish at C1,
+        working German, and a bit of Italian.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Selected Work</div>
+        <h2>What I've been building.</h2>
+      </div>
+      <div class="cards reveal">
+        <div class="card">
+          <h3>Olympus MARS — Robotic Arm Subsystem</h3>
+          <p>Co-founded Olympus MARS, KU Leuven's student Mars rover team, in March 2026. I lead the robotic
+          arm subsystem heading into the European Rover Challenge 2027 — requirements, arm-vs-CNC tradeoff
+          studies, and a growing team of engineers — and serve as Director of Finance &amp; Operations for
+          the club.</p>
+          <div class="tags">
+            <span class="tag">Team Lead</span>
+            <span class="tag">ERC 2027</span>
+            <span class="tag">20-Person Team</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Anomaly Detection for Robotic Unscrewing</h3>
+          <p>My thesis builds an unsupervised anomaly-detection pipeline for a robot that unscrews hard
+          drives — catching bad screws and misalignment from torque-sensor data on the arm's T2 and T3
+          joints. kNN is running; Isolation Forest and an autoencoder are next, benchmarked against it.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">ML</span>
+            <span class="tag">Sensor Data</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Olympus MARS Website</h3>
+          <p>Designed, built and shipped the Olympus MARS team website from scratch — HTML/CSS, domain
+          registration, and hosting — because someone had to and I didn't mind.</p>
+          <div class="tags">
+            <span class="tag">HTML / CSS</span>
+            <span class="tag">Domain &amp; Hosting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Experience</div>
+        <h2>Revision history.</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="revhist">
+          <thead>
+            <tr><th>Date</th><th>Role</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="date">Sep 2025 – Jan 2026</td>
+              <td class="role">Student Assistant, Object-Oriented Software Development — KU Leuven</td>
+              <td class="notes">Ran labs and guided students through OOP coursework.</td>
+            </tr>
+            <tr>
+              <td class="date">Summer 2023 &amp; Spring 2024</td>
+              <td class="role">Operations Assistant (Intern) — ARCA Properties, Luxembourg</td>
+              <td class="notes">Maintenance and commissioning of rental properties.</td>
+            </tr>
+            <tr>
+              <td class="date">2022 – 2023</td>
+              <td class="role">Private Maths Tutor — INTELLEGO, Luxembourg</td>
+              <td class="notes">One-to-one tutoring.</td>
+            </tr>
+            <tr>
+              <td class="date">2020 – 2022</td>
+              <td class="role">Summer Jobs — AVENCOR S.A., COSMOLUX INTERNATIONAL S.A., Commune de Consdorf</td>
+              <td class="notes">Various seasonal roles.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Skills</div>
+        <h2>Bill of materials.</h2>
+      </div>
+      <div class="bom reveal">
+        <div class="bom-group">
+          <h3>Software</h3>
+          <ul class="bom-list">
+            <li><span>Python</span><span class="bom-idx">001</span></li>
+            <li><span>ROS2</span><span class="bom-idx">002</span></li>
+            <li><span>OpenCV</span><span class="bom-idx">003</span></li>
+            <li><span>SQL / SQLite</span><span class="bom-idx">004</span></li>
+            <li><span>Git</span><span class="bom-idx">005</span></li>
+          </ul>
+        </div>
+        <div class="bom-group">
+          <h3>Hardware &amp; CAD</h3>
+          <ul class="bom-list">
+            <li><span>Siemens NX</span><span class="bom-idx">006</span></li>
+            <li><span>TIA Portal (PLC)</span><span class="bom-idx">007</span></li>
+            <li><span>MATLAB / Simulink</span><span class="bom-idx">008</span></li>
+            <li><span>Arduino</span><span class="bom-idx">009</span></li>
+          </ul>
+        </div>
+        <div class="bom-group">
+          <h3>Languages</h3>
+          <ul class="bom-list">
+            <li><span>Portuguese</span><span class="bom-idx">Native</span></li>
+            <li><span>English</span><span class="bom-idx">C1</span></li>
+            <li><span>French</span><span class="bom-idx">C1</span></li>
+            <li><span>Luxembourgish</span><span class="bom-idx">C1</span></li>
+            <li><span>German</span><span class="bom-idx">B2–C1</span></li>
+            <li><span>Italian</span><span class="bom-idx">A2–B1</span></li>
+          </ul>
+        </div>
+        <div class="bom-group">
+          <h3>Also On Hand</h3>
+          <ul class="bom-list">
+            <li><span>Java</span><span class="bom-idx">010</span></li>
+            <li><span>Industrial machine design</span><span class="bom-idx">011</span></li>
+            <li><span>Servo systems &amp; linear guides</span><span class="bom-idx">012</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="tight">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="eyebrow">Contact</div>
+        <h2>Get in touch.</h2>
+      </div>
+      <div class="contact-grid reveal">
+        <p class="about-text" style="margin-top:0;">
+          Based in Leuven, Belgium — open to robotics and mechatronics roles, collaboration, or just talking
+          shop about rover arms and torque sensors.
+        </p>
+        <div class="contact-fields">
+          <div class="cf-row">
+            <div class="cf-label">Email</div>
+            <div class="cf-value placeholder">[email protected]</div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-label">LinkedIn</div>
+            <div class="cf-value placeholder">linkedin.com/in/yourname</div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-label">GitHub</div>
+            <div class="cf-value placeholder">github.com/yourname</div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-label">Location</div>
+            <div class="cf-value">Leuven, Belgium</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
-  stek — propagated in leuven, since 2026
+  <div class="wrap">
+    <p>HAND-ASSEMBLED, NO FRAMEWORK REQUIRED</p>
+    <p>© 2026 PEDRO RAMOS</p>
+  </div>
 </footer>
 
 <script>
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  // Scroll reveal — respects reduced-motion via CSS transition durations above.
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    els.forEach(el=>io.observe(el));
+  } else {
+    els.forEach(el=>el.classList.add('in'));
+  }
 </script>
 
 </body>

@@ -18,6 +18,9 @@ section h2 {
   margin-bottom: 1rem;
 }
 
+.timeline h2 {
+  text-align: center;
+}
 
 /* ===== Timeline ===== */
 .timeline-list {

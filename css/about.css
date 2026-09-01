@@ -90,7 +90,6 @@ section h2 {
 .timeline-entry.year-start .timeline-dot {
   width: 14px;
   height: 14px;
-  background: var(--color-steel);
 }
 
 /* ===== Mobile fallback: single column ===== */

@@ -194,6 +194,16 @@ p {
   gap: 1rem;
 }
 
+.site-footer .socials a {
+  font-size: 1.3rem;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.site-footer .socials a:hover {
+  color: var(--color-sage);
+}
+
 .footer-contact {
   display: flex;
   align-items: center;

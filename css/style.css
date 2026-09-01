@@ -169,6 +169,27 @@ a.card:hover {
   border-color: var(--color-sage);
 }
 
+a.card {
+  position: relative;
+}
+
+a.card:not(.about-teaser-card)::after {
+  content: "\2192";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+  color: var(--color-sage);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+a.card:not(.about-teaser-card):hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 /* ===== Tags ===== */
 .tag {
   display: inline-block;

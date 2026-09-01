@@ -45,8 +45,8 @@ section h2 {
 }
 
 .timeline-dot {
-  width: 11px;
-  height: 11px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--color-sage);
   justify-self: center;

@@ -103,13 +103,13 @@
 }
 
 .about-teaser-img {
-  width: 96px;
-  height: 96px;
+  width: 100px;
+  height: 100px;
   border-radius: 12px;
   object-fit: cover;
   flex-shrink: 0;
   background: #DDE5DA;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
 }
 
 .about-teaser-content {

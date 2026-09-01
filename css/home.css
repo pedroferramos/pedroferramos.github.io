@@ -109,7 +109,7 @@
   object-fit: cover;
   flex-shrink: 0;
   background: #DDE5DA;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-text-muted);
 }
 
 .about-teaser-content {

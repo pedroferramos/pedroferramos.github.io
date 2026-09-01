@@ -58,11 +58,20 @@
 
 .featured-card {
   display: block;
+  padding: 0;
+  overflow: hidden;
   transition: border-color 0.15s ease;
 }
 
-.featured-card:hover {
-  border-color: var(--color-steel);
+.featured-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #DDE5DA;
+}
+
+.featured-card-body {
+  padding: 14px;
 }
 
 .featured-card i {

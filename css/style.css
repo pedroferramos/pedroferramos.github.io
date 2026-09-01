@@ -10,10 +10,10 @@
   --color-sage: #5A7850;
   --color-steel: #35597A;
   --color-border: #B9C4B2;
-  --color-tag-sage-bg: #EEF2ED;
-  --color-tag-sage-text: #3D5335;
-  --color-tag-steel-bg: #EAF1F6;
-  --color-tag-steel-text: #244258;
+  --color-tag-sage-bg: #D9E3D4;
+  --color-tag-sage-text: #2E4527;
+  --color-tag-steel-bg: #D6E3EC;
+  --color-tag-steel-text: #1D3A4E;
 
   --font-heading: 'Sora', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -214,6 +214,7 @@ a.card:hover .card-arrow {
   font-size: 0.7rem;
   padding: 0.25rem 0.7rem;
   border-radius: 20px;
+  border: 1px solid rgba(22, 33, 26, 0.08);
 }
 
 .tag-sage {

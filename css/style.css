@@ -131,11 +131,12 @@ p {
   padding: 0.6rem 1.1rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .btn:hover {
   opacity: 0.85;
+  transform: translateY(-2px);
 }
 
 .btn-primary {

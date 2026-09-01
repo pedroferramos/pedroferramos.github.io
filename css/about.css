@@ -22,17 +22,12 @@ section h2 {
 .timeline-list {
   display: flex;
   flex-direction: column;
+  gap: 1.75rem;
 }
 
-.timeline-entry {
+.timeline-year-group {
   display: flex;
   gap: 1rem;
-  position: relative;
-  padding-bottom: 1.5rem;
-}
-
-.timeline-entry:last-child {
-  padding-bottom: 0;
 }
 
 .timeline-year {
@@ -44,6 +39,29 @@ section h2 {
   padding-top: 0.15rem;
 }
 
+.timeline-year-entries {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.timeline-year-group--multi .timeline-year-entries::before {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: 5px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timeline-entry {
+  display: flex;
+  gap: 1rem;
+}
+
 .timeline-marker {
   position: relative;
   width: 12px;
@@ -53,47 +71,19 @@ section h2 {
 }
 
 .timeline-dot {
+  position: relative;
+  z-index: 1;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--color-sage);
   margin-top: 0.35rem;
-  z-index: 1;
-}
-
-.timeline-list {
-  position: relative;
-}
-
-.timeline-list::before {
-  content: "";
-  position: absolute;
-  top: 0.85rem;
-  bottom: 0.85rem;
-  left: 74px;
-  width: 2px;
-  background: var(--color-border);
-  z-index: 0;
-}
-
-.timeline-dot {
-  position: relative;
-  z-index: 1;
 }
 
 .timeline-content p {
   font-size: 0.9rem;
   line-height: 1.6;
   padding-top: 0.1rem;
-}
-
-.timeline-entry.year-start:not(:first-child) {
-  margin-top: 0.5rem;
-}
-
-.timeline-entry.year-start .timeline-dot {
-  width: 13px;
-  height: 13px;
 }
 
 /* ===== Personal cards ===== */

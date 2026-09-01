@@ -23,15 +23,11 @@ Then visit `http://localhost:8000` in your browser.
 
 ## Images needed
 
-**Required now** (referenced in the HTML — page shows a broken image icon until this exists):
-- `assets/images/home/pedro-headshot.jpg` — hero photo on the homepage
 
 **Recommended, once available** (currently placeholder icons only, no file needed yet):
 - Olympus MARS: 2–3 photos → `assets/images/projects/olympus-mars/`
 - Thesis: 1–2 photos (mind the embargo — no confidential setup/data shots) → `assets/images/projects/thesis/`
 - Each of the other 8 project pages: 2–3 photos each → `assets/images/projects/<project-name>/`
-
-**CV PDF**: `assets/cv/Pedro_Ramos_CV.pdf` (linked from the CV page's download button)
 
 ### Format & sizing
 
@@ -53,5 +49,4 @@ Hosted via GitHub Pages. Push to the repository's default branch (or configure P
 ## To do
 
 - Add real photos (headshot, project photos) to `assets/images/`
-- Add CV PDF to `assets/cv/Pedro_Ramos_CV.pdf`
 - Add Blog page (deferred for now)

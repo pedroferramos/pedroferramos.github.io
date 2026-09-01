@@ -176,6 +176,14 @@ a.card:hover {
   margin-bottom: 0.5rem;
 }
 
+.card-icon-row i {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  color: var(--color-steel);
+}
+
 .card-arrow {
   display: flex;
   align-items: center;

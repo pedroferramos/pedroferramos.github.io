@@ -9,7 +9,6 @@ main.container {
 /* ===== Bio ===== */
 .bio p {
   font-size: 1rem;
-  max-width: 680px;
   line-height: 1.7;
 }
 

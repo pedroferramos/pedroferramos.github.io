@@ -193,3 +193,17 @@ p {
   display: flex;
   gap: 1rem;
 }
+
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.footer-contact-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

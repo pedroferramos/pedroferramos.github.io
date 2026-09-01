@@ -87,6 +87,12 @@ section h2 {
   margin-top: 0.75rem;
 }
 
+.timeline-entry.year-start .timeline-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--color-steel);
+}
+
 /* ===== Mobile fallback: single column ===== */
 @media (max-width: 700px) {
   .timeline-list::before {

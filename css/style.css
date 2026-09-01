@@ -283,3 +283,9 @@ a.card:hover .card-arrow {
   opacity: 1;
   transform: translateY(0);
 }
+
+main.container > section:last-child,
+main.container > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}

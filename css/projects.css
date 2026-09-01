@@ -28,10 +28,6 @@ main.container {
   transition: border-color 0.15s ease;
 }
 
-.flagship-card:hover {
-  border-color: var(--color-steel);
-}
-
 .flagship-card i {
   font-size: 1.3rem;
   color: var(--color-steel);
@@ -58,10 +54,6 @@ main.container {
 .project-card {
   display: block;
   transition: border-color 0.15s ease;
-}
-
-.project-card:hover {
-  border-color: var(--color-sage);
 }
 
 .project-card h3 {

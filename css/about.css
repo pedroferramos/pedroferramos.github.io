@@ -231,13 +231,6 @@ section h2 {
   padding: 1rem 1.1rem;
 }
 
-.personal-card i {
-  font-size: 1.1rem;
-  color: var(--color-sage);
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
 .personal-card h3 {
   font-size: 0.9rem;
   margin-bottom: 0.3rem;

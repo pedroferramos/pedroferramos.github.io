@@ -24,21 +24,28 @@ section h2 {
 
 /* ===== Timeline ===== */
 .timeline-list {
+  position: relative;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+  transform: translateX(-50%);
 }
 
 .timeline-entry {
-  display: flex;
-  gap: 1rem;
-}
-
-.timeline-marker {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr;
   align-items: center;
-  flex-shrink: 0;
-  padding-top: 0.4rem;
 }
 
 .timeline-dot {
@@ -46,22 +53,28 @@ section h2 {
   height: 12px;
   border-radius: 50%;
   background: var(--color-sage);
-  flex-shrink: 0;
+  justify-self: center;
+  position: relative;
+  z-index: 1;
 }
 
-.timeline-line {
-  width: 2px;
-  flex: 1;
-  background: var(--color-border);
-  margin-top: 0.4rem;
+.timeline-card-wrap {
+  max-width: 340px;
+}
+
+.timeline-left .timeline-card-wrap {
+  justify-self: end;
+  margin-right: 0.75rem;
+}
+
+.timeline-right .timeline-card-wrap {
+  justify-self: start;
+  margin-left: 0.75rem;
 }
 
 .timeline-card {
   padding: 0;
   overflow: hidden;
-  margin-bottom: 1rem;
-  flex: 1;
-  max-width: 480px;
 }
 
 .timeline-card-img {
@@ -80,7 +93,8 @@ section h2 {
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-sage);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+  min-height: 1em;
 }
 
 .timeline-card-body h3 {
@@ -97,9 +111,46 @@ section h2 {
 
 .timeline-link {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   color: var(--color-steel);
+}
+
+/* ===== Mobile fallback: single column ===== */
+@media (max-width: 700px) {
+  .timeline-list::before {
+    left: 5px;
+    transform: none;
+  }
+
+  .timeline-entry.timeline-left,
+  .timeline-entry.timeline-right {
+    display: grid;
+    grid-template-columns: 12px 1fr;
+    column-gap: 0.75rem;
+    align-items: start;
+  }
+
+  .timeline-left .timeline-spacer,
+  .timeline-right .timeline-spacer {
+    display: none;
+  }
+
+  .timeline-left .timeline-dot,
+  .timeline-right .timeline-dot {
+    order: 1;
+    justify-self: start;
+    margin-top: 0.3rem;
+  }
+
+  .timeline-left .timeline-card-wrap,
+  .timeline-right .timeline-card-wrap {
+    order: 2;
+    justify-self: start !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: none;
+  }
 }
 
 /* ===== Personal cards ===== */

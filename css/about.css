@@ -42,12 +42,21 @@ section h2 {
 
 .timeline-year-block {
   position: relative;
+  margin-top: 2rem;
+}
+
+.timeline-year-block:first-child {
+  margin-top: 0;
 }
 
 .timeline-year-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+}
+
+.timeline-year-row > span {
+  flex: 1;
 }
 
 .timeline-year-label {
@@ -69,7 +78,9 @@ section h2 {
 }
 
 .timeline-entry {
-  display: flex;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   margin-bottom: 0.9rem;
 }
@@ -78,22 +89,11 @@ section h2 {
   margin-bottom: 0;
 }
 
-.timeline-dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--color-sage);
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-
 .timeline-spacer {
-  flex: 1;
+  display: none;
 }
 
 .timeline-photo-text {
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 0.65rem;
@@ -101,15 +101,32 @@ section h2 {
 }
 
 .timeline-left .timeline-photo-text {
-  justify-content: flex-end;
-  padding-right: 0.75rem;
-  margin-left: auto;
+  grid-column: 1;
+  justify-self: end;
+  padding-right: 1.25rem;
 }
 
 .timeline-right .timeline-photo-text {
-  justify-content: flex-start;
-  padding-left: 0.75rem;
-  margin-right: auto;
+  grid-column: 2;
+  justify-self: start;
+  padding-left: 1.25rem;
+}
+
+.timeline-dot {
+  width: 11px;
+  height: 11px;
+  min-width: 11px;
+  min-height: 11px;
+  max-width: 11px;
+  max-height: 11px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .timeline-photo {
@@ -148,12 +165,6 @@ section h2 {
   color: var(--color-steel);
 }
 
-.timeline-divider {
-  height: 1px;
-  background: var(--color-border);
-  margin: 1.5rem 0;
-}
-
 /* ===== Mobile fallback: single column ===== */
 @media (max-width: 700px) {
   .timeline-list::before {
@@ -187,11 +198,6 @@ section h2 {
     order: 2;
   }
 
-  .timeline-left .timeline-spacer,
-  .timeline-right .timeline-spacer {
-    display: none;
-  }
-
   .timeline-left .timeline-photo-text,
   .timeline-right .timeline-photo-text {
     justify-content: flex-start !important;
@@ -209,10 +215,20 @@ section h2 {
 }
 
 /* ===== Personal cards ===== */
-.personal-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+.personal-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.personal-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #DDE5DA;
+}
+
+.personal-card-body {
+  padding: 1rem 1.1rem;
 }
 
 .personal-card i {
